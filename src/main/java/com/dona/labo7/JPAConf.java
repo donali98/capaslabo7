@@ -2,6 +2,7 @@ package com.dona.labo7;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
@@ -15,17 +16,20 @@ import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
+@EnableJpaRepositories(basePackages = "com.dona.labo7.repositories")
+
 public class JPAConf {
     @Bean
     public DataSource dataSource(){
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("org.postgresql.Driver");
         dataSource.setUrl("jdbc:postgresql://127.0.0.1:5432/bdescuela");
-        dataSource.setUsername("dona");
+        dataSource.setUsername("postgres");
         dataSource.setPassword("1234");
         return dataSource;
     }
-    @Bean
+    //Tuve que ponerle el parametro name y asignarle ese valor, no entiendo porque, si no sirve por eso quitarlo
+    @Bean(name = "transactionManager")
     public JpaTransactionManager transactionalManager(EntityManagerFactory entityManagerFactory) {
         JpaTransactionManager transactionManager  = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory);
