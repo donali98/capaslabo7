@@ -8,6 +8,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -37,6 +38,23 @@ public class MainController {
         ModelAndView mav = new ModelAndView();
         mav.addObject("student", new Estudiante());
         mav.setViewName("agregarEstudiante");
+        return mav;
+    }
+    @PostMapping(value = "/mostrarEstudiante")
+    public ModelAndView findOne(@RequestParam(value = "codigo") int id) {
+        ModelAndView mav = new ModelAndView();
+        Estudiante student = null;
+        try {
+            student = estudianteService.findOne(id);
+        }
+        catch(Exception e) {
+            e.printStackTrace();
+        }
+
+
+        mav.addObject("student", student);
+        mav.setViewName("estudiante");
+
         return mav;
     }
 
