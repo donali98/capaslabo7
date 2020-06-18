@@ -22,8 +22,8 @@
         </form>
 
         <form class="my-2" method="post" th:action="@{/filtrar}">
-            <label for="">Ingresar la cadena por la que desea filtrar</label>
-            <input class="form-control" name="nombre" type="text">
+            <label for="nombre">Ingresar la cadena por la que desea filtrar</label>
+            <input id="nombre" class="form-control" name="nombre" type="text">
             <input class="btn btn-info" type="submit" value="Filtrar"><br>
         </form>
 
@@ -32,6 +32,16 @@
             <input class="form-control" name="codigo" type="number"><br>
             <input class="btn btn-danger" type="submit" value="Borrar">
         </form>
+        <form class="my-2" method="POST" th:action="@{/modificarEstudiante}">
+            <label>Modificar estudiante por codigo: </label>
+            <input class="form-control" name="codigo" type="number"><br>
+            <input class="btn btn-info" type="submit" value="Modificar">
+        </form>
+        <div class="col-sm-6">
+            <form th:action="@{/estudiante}">
+                <input type="submit" value="Recargar" class="btn btn-success">
+            </form>
+        </div>
         <table class="table table-responsive-sm">
             <thead>
             <th>Codigo</th>
