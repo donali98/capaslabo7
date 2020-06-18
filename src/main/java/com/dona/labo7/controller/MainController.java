@@ -31,6 +31,15 @@ public class MainController {
         mav.setViewName("main");
         return mav;
     }
+
+    @GetMapping("/insertarEstudiante")
+    public ModelAndView inicio() {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("student", new Estudiante());
+        mav.setViewName("agregarEstudiante");
+        return mav;
+    }
+
     @PostMapping(value="/save")
     public ModelAndView guardar(@Valid @ModelAttribute("student") Estudiante student, BindingResult result) {
         ModelAndView mav = new ModelAndView();
