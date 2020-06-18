@@ -24,4 +24,9 @@ public class EstudianteServiceImpl  implements  EstudianteService{
 
     @Override
     public void delete(Integer code) throws DataAccessException { estudianteRepo.deleteById(code); }
+
+    @Override
+    public List<Estudiante> filtrarPor(String cadena) throws DataAccessException {
+        return estudianteRepo.findByName(cadena);
+    }
 }

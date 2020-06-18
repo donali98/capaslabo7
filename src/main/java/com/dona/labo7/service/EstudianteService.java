@@ -10,5 +10,5 @@ public interface EstudianteService {
     public Estudiante findOne(Integer code) throws DataAccessException;
     public void save(Estudiante student) throws DataAccessException;
     public void delete(Integer code) throws DataAccessException;
-
+    public List<Estudiante> filtrarPor(String cadena) throws DataAccessException;
 }
