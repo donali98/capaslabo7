@@ -57,6 +57,20 @@ public class MainController {
 
         return mav;
     }
+    @PostMapping(value = "/borrarEstudiante")
+    public ModelAndView delete(@RequestParam(value = "codigo") int id) {
+        ModelAndView mav = new ModelAndView();
+        List<Estudiante> students = null;
+        try{
+            estudianteService.delete(id);
+            students = estudianteService.findAll();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        mav.addObject("students", students);
+        mav.setViewName("main");
+        return mav;
+    }
 
     @PostMapping(value="/save")
     public ModelAndView guardar(@Valid @ModelAttribute("student") Estudiante student, BindingResult result) {
