@@ -3,41 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <title>Inicio</title>
+    <link crossorigin="anonymous" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" rel="stylesheet">
 </head>
-<body>
-<table>
-    <thead>
-    <th>Codigo</th>
-    <th>Nombre</th>
-    <th>Apellido</th>
-    <th>Edad</th>
-    <th>Estado</th>
-    </thead>
-    <th:block th:each="estudiante, row:${students}">
-        <tr>
-            <td th:text="${estudiante.codStudent}"></td>
-            <td th:text="${estudiante.name}"></td>
-            <td th:text="${estudiante.lastName}"></td>
-            <td th:text="${estudiante.age}"></td>
-            <td th:text="${estudiante.estadoDelegate}"></td>
-        </tr>
-    </th:block>
-</table>
-<br>
-<form th:action="@{/mostrarEstudiante}" method="POST">
-    <label>Buscar por codigo de estudiante: </label>
-    <input type="number" name="codigo"><br>
-    <input type="submit" value="Buscar">
-</form>
+<body class="mt-3">
+<div class="row align-items-center justify-content-center">
+    <div class="col-sm-6">
+        <form method="POST" th:action="@{/mostrarEstudiante}" class="mb-1">
+            <div class="form-group">
+                <label>Buscar por codigo de estudiante: </label>
+                <input name="codigo" type="number" class="form-control"><br>
+                <input type="submit" value="Buscar" class="btn btn-info">
+            </div>
+        </form>
 
-<form th:action="@{/insertarEstudiante}">
-    <input type="submit" value="Insertar nuevo estudiante"><br>
-</form>
+        <form th:action="@{/insertarEstudiante}" class="my-2">
+            <input type="submit" value="Insertar nuevo estudiante" class="btn btn-success"><br>
+        </form>
 
-<form th:action="@{/borrarEstudiante}" method="POST">
-    <label>Borrar estudiante por codigo: </label>
-    <input type="number" name="codigo"><br>
-    <input type="submit" value="Borrar">
-</form>
+        <form method="POST" th:action="@{/borrarEstudiante}" class="my-2">
+            <label>Borrar estudiante por codigo: </label>
+            <input name="codigo" class="form-control" type="number"><br>
+            <input type="submit" value="Borrar" class="btn btn-danger">
+        </form>
+        <table class="table table-responsive-sm">
+            <thead>
+            <th>Codigo</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Edad</th>
+            <th>Estado</th>
+            </thead>
+            <th:block th:each="estudiante, row:${students}">
+                <tr>
+                    <td th:text="${estudiante.codStudent}"></td>
+                    <td th:text="${estudiante.name}"></td>
+                    <td th:text="${estudiante.lastName}"></td>
+                    <td th:text="${estudiante.age}"></td>
+                    <td th:text="${estudiante.estadoDelegate}"></td>
+                </tr>
+            </th:block>
+        </table>
+    </div>
+
+</div>
+
 </body>
 </html>

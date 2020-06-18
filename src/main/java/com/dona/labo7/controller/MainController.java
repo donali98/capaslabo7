@@ -4,9 +4,13 @@ import com.dona.labo7.domain.Estudiante;
 import com.dona.labo7.service.EstudianteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @Controller
@@ -25,6 +29,26 @@ public class MainController {
         }
         mav.addObject("students", students);
         mav.setViewName("main");
+        return mav;
+    }
+    @PostMapping(value="/save")
+    public ModelAndView guardar(@Valid @ModelAttribute("student") Estudiante student, BindingResult result) {
+        ModelAndView mav = new ModelAndView();
+        if(result.hasErrors()) {
+            mav.setViewName("agregarEstudiante");
+            mav.addObject("student", student);
+        }
+        else {
+            estudianteService.save(student);
+            List<Estudiante> students = null;
+            try{
+                students = estudianteService.findAll();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            mav.addObject("students", students);
+            mav.setViewName("listaEstudiantes");
+        }
         return mav;
     }
 }

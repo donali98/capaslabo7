@@ -28,7 +28,7 @@ public class JPAConf {
         dataSource.setPassword("1234");
         return dataSource;
     }
-    //Tuve que ponerle el parametro name y asignarle ese valor, no entiendo porque, si no sirve por eso quitarlo
+    //Tuve que ponerle el parametro name y asignarle ese valor, no entiendo porque, si no sirve por eso, quitarlo
     @Bean(name = "transactionManager")
     public JpaTransactionManager transactionalManager(EntityManagerFactory entityManagerFactory) {
         JpaTransactionManager transactionManager  = new JpaTransactionManager();
